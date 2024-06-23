@@ -42,9 +42,14 @@ then
     echo 'Keystore found'
 else
     echo 'Generating keystore...'
-    keytool \
+    # keytool
+    docker run -it --rm \
+     -v $(pwd):$(pwd) \
+     -w $(pwd) \
+     azul/zulu-openjdk:8u232 \
+     keytool \
      -genseckey \
-     -keystore $(pwd)/keystore \
+     -keystore keystore \
      -storetype ${STORETYPE} \
      -alias ${KEYALIAS} \
      -keyalg ${KEYALG} \
